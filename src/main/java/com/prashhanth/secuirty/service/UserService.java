@@ -1,10 +1,16 @@
 package com.prashhanth.secuirty.service;
 
+import com.prashhanth.secuirty.config.AppUserDetailsService;
+import com.prashhanth.secuirty.config.JwtTokenUtil;
 import com.prashhanth.secuirty.entity.User;
 import com.prashhanth.secuirty.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +44,6 @@ public class UserService {
         logger.info("Users List "+userRepo.findAll());
         return userRepo.findAll();
     }
+
 
 }
