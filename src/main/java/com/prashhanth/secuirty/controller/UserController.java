@@ -44,6 +44,11 @@ public class UserController {
         return service.addUser(user);
     }
 
+    @GetMapping("/health")
+    public String getStatus(){
+        return "UP";
+    }
+
     @GetMapping("/user/{id}")
     public Optional<User> getUserById(@PathVariable("id") Integer id){
         logger.info("Id passed to Controller "+id);

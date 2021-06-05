@@ -1,5 +1,9 @@
 package com.prashhanth.secuirty.config;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +18,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
+@OpenAPIDefinition(info = @Info(title = "My API", version = "v1"))
+@SecurityScheme(
+        name = "bearerAuth",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+)
 @EnableWebSecurity
 public class SpringSecurity extends WebSecurityConfigurerAdapter {
 
@@ -40,9 +51,9 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/admin").hasAnyRole("ADMIN")
-                .antMatchers("/add").hasAnyRole("CREATOR")
+                //.antMatchers("/add").hasAnyRole("CREATOR")
                 .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
-                .antMatchers("/authenticate").permitAll()
+                .antMatchers("/authenticate","/health","/add").permitAll()
                 .and().
         exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
