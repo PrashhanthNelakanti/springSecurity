@@ -1,16 +1,11 @@
 package com.prashhanth.secuirty.service;
 
-import com.prashhanth.secuirty.config.AppUserDetailsService;
-import com.prashhanth.secuirty.config.JwtTokenUtil;
 import com.prashhanth.secuirty.entity.User;
+import com.prashhanth.secuirty.exception.UserAlreadyExits;
 import com.prashhanth.secuirty.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +25,15 @@ public class UserService {
 
     public User addUser(User user){
         logger.info("Added user "+user);
+        if(!getUserByName(user.getName()).isEmpty())
+            throw new UserAlreadyExits("Check the your "+user.getName());
         String enCodedPwd=bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(enCodedPwd);
         return userRepo.save(user);
+    }
+
+    public Optional<User> getUserByName(String name){
+        return userRepo.findByName(name);
     }
 
     public Optional<User> getUserById(Integer id){

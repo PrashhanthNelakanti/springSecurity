@@ -5,6 +5,7 @@ import com.prashhanth.secuirty.config.JwtTokenUtil;
 import com.prashhanth.secuirty.entity.JwtRequest;
 import com.prashhanth.secuirty.entity.JwtResponse;
 import com.prashhanth.secuirty.entity.User;
+import com.prashhanth.secuirty.exception.UserAlreadyExits;
 import com.prashhanth.secuirty.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
