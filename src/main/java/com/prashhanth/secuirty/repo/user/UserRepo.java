@@ -1,6 +1,6 @@
-package com.prashhanth.secuirty.repo;
+package com.prashhanth.secuirty.repo.user;
 
-import com.prashhanth.secuirty.entity.User;
+import com.prashhanth.secuirty.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package com.prashhanth.secuirty.config;
 
-import com.prashhanth.secuirty.entity.User;
+import com.prashhanth.secuirty.entity.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

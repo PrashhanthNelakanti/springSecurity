@@ -1,8 +1,8 @@
 package com.prashhanth.secuirty.service;
 
-import com.prashhanth.secuirty.entity.User;
+import com.prashhanth.secuirty.entity.user.User;
 import com.prashhanth.secuirty.exception.UserAlreadyExits;
-import com.prashhanth.secuirty.repo.UserRepo;
+import com.prashhanth.secuirty.repo.user.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
