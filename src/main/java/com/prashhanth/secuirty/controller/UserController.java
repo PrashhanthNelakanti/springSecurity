@@ -60,7 +60,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public Optional<User> getUserById(@PathVariable("id") Integer id){
+    public Optional<User> getUserById(@PathVariable("id") String id){
         logger.info("Id passed to Controller "+id);
         return service.getUserById(id);
     }

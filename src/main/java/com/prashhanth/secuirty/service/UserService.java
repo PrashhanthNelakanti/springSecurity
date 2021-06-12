@@ -36,7 +36,7 @@ public class UserService {
         return userRepo.findByName(name);
     }
 
-    public Optional<User> getUserById(Integer id){
+    public Optional<User> getUserById(String id){
         logger.info("User id provided "+id);
         return userRepo.findById(id);
     }
