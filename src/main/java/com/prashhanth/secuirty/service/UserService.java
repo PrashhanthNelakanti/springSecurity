@@ -25,8 +25,8 @@ public class UserService {
 
     public User addUser(User user){
         logger.info("Added user "+user);
-        if(!getUserByName(user.getName()).isEmpty())
-            throw new UserAlreadyExits("Check the your "+user.getName());
+        if(getUserByName(user.getName()).isPresent())
+            throw new UserAlreadyExits("Check the user "+user.getName());
         String enCodedPwd=bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(enCodedPwd);
         return userRepo.save(user);

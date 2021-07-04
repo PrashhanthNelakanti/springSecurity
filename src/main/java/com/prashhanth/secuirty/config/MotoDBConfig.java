@@ -19,8 +19,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "motoEntityManagerFactory", transactionManagerRef = "motoTransactionManager", basePackages = {
-        "com.prashhanth.secuirty.repo.moto" })
+@EnableJpaRepositories(entityManagerFactoryRef = "motoEntityManagerFactory",
+        transactionManagerRef = "motoTransactionManager", basePackages = {
+        "com.prashhanth.secuirty.repo.moto","com.prashhanth.secuirty.repo.student","com.prashhanth.secuirty.repo.laptop"},considerNestedRepositories = true)
 public class MotoDBConfig {
 
     @Bean(name = "motoDataSource")
@@ -36,7 +37,9 @@ public class MotoDBConfig {
         properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         return builder.dataSource(dataSource).properties(properties)
-                .packages("com.prashhanth.secuirty.entity.moto").persistenceUnit("Moto").build();
+                .packages("com.prashhanth.secuirty.entity").persistenceUnit("Moto")
+                .persistenceUnit("Laptop").persistenceUnit("Student")
+                        .build();
     }
 
     @Bean(name = "motoTransactionManager")
