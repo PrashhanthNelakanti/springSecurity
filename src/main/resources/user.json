@@ -1,0 +1,7 @@
+
+{
+  "name": "Prashhanth11",
+  "password": "asdf",
+  "active": true,
+  "role": "ROLE_USER,ROLE_ADMIN"
+}
