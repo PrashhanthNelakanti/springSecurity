@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(entityManagerFactoryRef = "motoEntityManagerFactory",
         transactionManagerRef = "motoTransactionManager", basePackages = {
-        "com.prashhanth.secuirty.repo.moto","com.prashhanth.secuirty.repo.student","com.prashhanth.secuirty.repo.laptop"},considerNestedRepositories = true)
+        "com.prashhanth.secuirty.repo.moto","com.prashhanth.secuirty.repo.student","com.prashhanth.secuirty.repo.laptop","com.prashhanth.secuirty.repo.roles"},considerNestedRepositories = true)
 public class MotoDBConfig {
 
     @Bean(name = "motoDataSource")
