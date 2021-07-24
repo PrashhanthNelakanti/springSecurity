@@ -1,4 +1,4 @@
-package com.prashhanth.secuirty.repo.user;
+package com.prashhanth.secuirty.repo;
 
 import com.prashhanth.secuirty.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

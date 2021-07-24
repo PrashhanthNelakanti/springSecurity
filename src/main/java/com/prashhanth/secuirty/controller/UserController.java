@@ -4,9 +4,7 @@ import com.prashhanth.secuirty.config.AppUserDetailsService;
 import com.prashhanth.secuirty.config.JwtTokenUtil;
 import com.prashhanth.secuirty.entity.JwtRequest;
 import com.prashhanth.secuirty.entity.JwtResponse;
-import com.prashhanth.secuirty.entity.moto.Motor;
 import com.prashhanth.secuirty.entity.user.User;
-import com.prashhanth.secuirty.service.MotoService;
 import com.prashhanth.secuirty.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,11 +36,6 @@ public class UserController {
 
     @Autowired
     private AppUserDetailsService userDetailsService;
-
-    @Autowired
-    private MotoService motoService;
-
-
     @PostMapping("/add")
     public User addDefaults(@RequestBody User user){
         logger.info("User added from Controller "+user);
@@ -52,11 +45,6 @@ public class UserController {
     @GetMapping("/health")
     public String getStatus(){
         return "UP";
-    }
-
-    @GetMapping("/moto")
-    public Motor getSample(){
-        return motoService.saveMoto();
     }
 
     @GetMapping("/user/{id}")
