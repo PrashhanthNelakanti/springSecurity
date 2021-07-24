@@ -2,6 +2,7 @@ package com.prashhanth.secuirty.controller;
 
 import com.prashhanth.secuirty.config.AppUserDetailsService;
 import com.prashhanth.secuirty.config.JwtTokenUtil;
+import com.prashhanth.secuirty.entity.CustomUser;
 import com.prashhanth.secuirty.entity.JwtRequest;
 import com.prashhanth.secuirty.entity.JwtResponse;
 import com.prashhanth.secuirty.entity.user.User;
@@ -80,6 +81,11 @@ public class UserController {
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
+    }
+
+    @GetMapping("/only/users")
+    public List<CustomUser> allUsers(){
+        return service.getUsers();
     }
 
 }
