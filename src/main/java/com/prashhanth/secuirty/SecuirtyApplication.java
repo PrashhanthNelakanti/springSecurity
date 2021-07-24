@@ -4,8 +4,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@EnableJpaRepositories(basePackageClasses = {UserRepo.class})
-public class SecuirtyApplication {
+@EnableEncryptableProperties
+public class SecuirtyApplication extends SpringBootServletInitializer {
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(SecuirtyApplication.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SecuirtyApplication.class, args);
