@@ -54,6 +54,12 @@ public class UserController {
         return service.getUserById(id);
     }
 
+    @GetMapping("/user/name/{name}")
+    public Optional<User> getUserByName(@PathVariable("name") String name){
+        logger.info("Id passed to Controller "+name);
+        return service.getUserByName(name);
+    }
+
     @GetMapping("/admin")
     public List<User> getAllUsers(){
         logger.info("Find All Users");
