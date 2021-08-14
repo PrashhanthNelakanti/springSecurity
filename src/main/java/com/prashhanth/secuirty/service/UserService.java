@@ -1,6 +1,6 @@
 package com.prashhanth.secuirty.service;
 
-import com.prashhanth.secuirty.entity.CustomUser;
+
 import com.prashhanth.secuirty.entity.user.User;
 import com.prashhanth.secuirty.exception.RoleDoNotExists;
 import com.prashhanth.secuirty.exception.UserAlreadyExits;
@@ -68,9 +68,7 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public List<CustomUser> getUsers(){
-        return userRepo.getAllUser();
-    }
+
 
 
 }
