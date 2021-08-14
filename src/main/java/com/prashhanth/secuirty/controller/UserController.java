@@ -2,11 +2,10 @@ package com.prashhanth.secuirty.controller;
 
 import com.prashhanth.secuirty.config.AppUserDetailsService;
 import com.prashhanth.secuirty.config.JwtTokenUtil;
+import com.prashhanth.secuirty.entity.CustomUser;
 import com.prashhanth.secuirty.entity.JwtRequest;
 import com.prashhanth.secuirty.entity.JwtResponse;
-import com.prashhanth.secuirty.entity.moto.Motor;
 import com.prashhanth.secuirty.entity.user.User;
-import com.prashhanth.secuirty.service.MotoService;
 import com.prashhanth.secuirty.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,11 +37,6 @@ public class UserController {
 
     @Autowired
     private AppUserDetailsService userDetailsService;
-
-    @Autowired
-    private MotoService motoService;
-
-
     @PostMapping("/add")
     public User addDefaults(@RequestBody User user){
         logger.info("User added from Controller "+user);
@@ -54,15 +48,16 @@ public class UserController {
         return "UP";
     }
 
-    @GetMapping("/moto")
-    public Motor getSample(){
-        return motoService.saveMoto();
-    }
-
     @GetMapping("/user/{id}")
     public Optional<User> getUserById(@PathVariable("id") String id){
         logger.info("Id passed to Controller "+id);
         return service.getUserById(id);
+    }
+
+    @GetMapping("/user/name/{name}")
+    public Optional<User> getUserByName(@PathVariable("name") String name){
+        logger.info("Id passed to Controller "+name);
+        return service.getUserByName(name);
     }
 
     @GetMapping("/admin")
@@ -92,6 +87,11 @@ public class UserController {
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
+    }
+
+    @GetMapping("/only/users")
+    public List<CustomUser> allUsers(){
+        return service.getUsers();
     }
 
 }

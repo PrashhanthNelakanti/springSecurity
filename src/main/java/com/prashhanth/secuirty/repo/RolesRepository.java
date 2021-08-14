@@ -1,4 +1,4 @@
-package com.prashhanth.secuirty.repo.roles;
+package com.prashhanth.secuirty.repo;
 
 import com.prashhanth.secuirty.entity.roles.Roles;
 import org.springframework.data.jpa.repository.JpaRepository;

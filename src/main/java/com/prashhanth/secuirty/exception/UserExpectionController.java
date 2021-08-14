@@ -15,7 +15,7 @@ public class UserExpectionController {
 
     @ExceptionHandler(value = RoleDoNotExists.class)
     public ResponseEntity<Object> exception(RoleDoNotExists exception) {
-        return new ResponseEntity<>("Please check the role "+exception.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Please check the role "+exception.getMessage()+" does not exists", HttpStatus.BAD_REQUEST);
     }
 
 }

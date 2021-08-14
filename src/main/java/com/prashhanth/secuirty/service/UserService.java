@@ -1,10 +1,11 @@
 package com.prashhanth.secuirty.service;
 
+import com.prashhanth.secuirty.entity.CustomUser;
 import com.prashhanth.secuirty.entity.user.User;
 import com.prashhanth.secuirty.exception.RoleDoNotExists;
 import com.prashhanth.secuirty.exception.UserAlreadyExits;
-import com.prashhanth.secuirty.repo.roles.RolesRepository;
-import com.prashhanth.secuirty.repo.user.UserRepo;
+import com.prashhanth.secuirty.repo.RolesRepository;
+import com.prashhanth.secuirty.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,10 @@ public class UserService {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User addUser(User user){
-        logger.info("Added user "+user);
-        if(getUserByName(user.getName()).isPresent())
+        logger.info("Adding user "+user);
+        if(getUserByName(user.getName()).isPresent()) {
             throw new UserAlreadyExits("Check the user "+user.getName());
+        }
         String roles = Arrays.stream(user.getRole().split(",")).
                 filter(u->checkUserExists(u))
                 .map(x -> "ROLE_" + x).
@@ -41,6 +43,7 @@ public class UserService {
         user.setRole(roles);
         String enCodedPwd=bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(enCodedPwd);
+        logger.info("Added user "+user);
         return userRepo.save(user);
     }
 
@@ -63,6 +66,10 @@ public class UserService {
     public List<User> getAllUsers(){
         logger.info("Users List "+userRepo.findAll());
         return userRepo.findAll();
+    }
+
+    public List<CustomUser> getUsers(){
+        return userRepo.getAllUser();
     }
 
 

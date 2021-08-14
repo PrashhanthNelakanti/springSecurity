@@ -1,4 +1,4 @@
-package com.prashhanth.secuirty.seqGenerator;
+package com.prashhanth.secuirty.util.seqGenerator;
 
 import org.hibernate.HibernateException;
 import org.hibernate.MappingException;
