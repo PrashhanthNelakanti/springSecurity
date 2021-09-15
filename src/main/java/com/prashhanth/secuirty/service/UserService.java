@@ -1,6 +1,6 @@
 package com.prashhanth.secuirty.service;
 
-
+import com.prashhanth.secuirty.controller.UserController;
 import com.prashhanth.secuirty.entity.user.User;
 import com.prashhanth.secuirty.exception.RoleDoNotExists;
 import com.prashhanth.secuirty.exception.UserAlreadyExits;
@@ -9,13 +9,19 @@ import com.prashhanth.secuirty.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class UserService {
@@ -31,7 +37,7 @@ public class UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public User addUser(User user){
+    public ResponseEntity<?> addUser(User user){
         logger.info("Adding user "+user);
         if(getUserByName(user.getName()).isPresent()) {
             throw new UserAlreadyExits("Check the user "+user.getName());
@@ -44,7 +50,9 @@ public class UserService {
         String enCodedPwd=bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(enCodedPwd);
         logger.info("Added user "+user);
-        return userRepo.save(user);
+        User userObj = userRepo.save(user);
+        user.add(linkTo(methodOn(UserController.class).getAllUsers()).withSelfRel());
+        return new ResponseEntity<>(userObj, HttpStatus.CREATED);
     }
 
     public boolean checkUserExists(String role){
@@ -63,9 +71,17 @@ public class UserService {
         return userRepo.findById(id);
     }
 
-    public List<User> getAllUsers(){
+    public ResponseEntity<List<User>> getAllUsers(){
         logger.info("Users List "+userRepo.findAll());
-        return userRepo.findAll();
+        List<User> all = userRepo.findAll();
+        List<User> userUp = new ArrayList();
+
+        for (User user:
+             all) {
+            user.add(linkTo(methodOn(UserController.class).getUserById(user.getUserId())).withSelfRel());
+            userUp.add(user);
+        }
+        return new ResponseEntity(userUp,HttpStatus.OK);
     }
 
 
