@@ -1,3 +1,3 @@
-spring:
-  application:
-    name: SpringSecurity
+#spring:
+#  application:
+#    name: SpringSecurity
