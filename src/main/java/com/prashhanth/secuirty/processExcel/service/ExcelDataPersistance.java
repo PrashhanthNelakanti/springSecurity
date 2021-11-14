@@ -17,8 +17,10 @@ public class ExcelDataPersistance {
 
     public String createTable(String filename,String query) {
         String msg = null;
+        filename=filename.substring(0,filename.indexOf("."));
         query = AppConstants.CREATE_TABLE_IF_NOT_EXISTS +filename+"("+query;
         query = query.substring(0,query.length()-2);
+        query=query+")";
         try {
             logger.info("Creating table..."+query);
             jdbcTemplate.execute(query);
