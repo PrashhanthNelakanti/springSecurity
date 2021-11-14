@@ -42,7 +42,7 @@ public class ExcelProcessService {
             Sheet sheet = workbook.getSheetAt(1);
             Iterator<Row> rows = sheet.iterator();
             int rowNumber = 0;
-            String createTable = null;
+            String query = null;
             while (rows.hasNext()) {
                 Row currentRow = rows.next();
                 Iterator<Cell> cellsInRow = currentRow.iterator();
@@ -59,12 +59,13 @@ public class ExcelProcessService {
                             System.out.println(currentCell.getCellFormula());
                         }*/
                     } else {
-                        createTable = excelProcessServiceHelper.getColumnName(currentCell.getStringCellValue());
+                        query = excelProcessServiceHelper.getColumnName(currentCell.getStringCellValue());
                     }
                 }
                 rowNumber++;
             }
-            excelDataPersistance.createTable(fileName,createTable);
+            String finalQuery = excelProcessServiceHelper.finalCreateQuery(fileName, query);
+            excelDataPersistance.createTable(finalQuery);
         } catch (Exception e) {
             System.out.println(e);
         }

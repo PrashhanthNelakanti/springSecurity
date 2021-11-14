@@ -26,4 +26,12 @@ public class ExcelProcessServiceHelper {
         }
         return colNm;
     }
+
+    public String finalCreateQuery(String filename, String query) {
+        filename=filename.substring(0,filename.indexOf("."));
+        query = AppConstants.CREATE_TABLE_IF_NOT_EXISTS +filename+"("+query;
+        query = query.substring(0,query.length()-2);
+        query= query+")";
+        return query;
+    }
 }
