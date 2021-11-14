@@ -1,23 +1,29 @@
 package com.prashhanth.secuirty.processExcel.service;
 
+import com.prashhanth.secuirty.processExcel.controller.ExcelProcessController;
+import com.prashhanth.secuirty.util.AppConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ExcelProcessServiceHelper {
 
-    String columnNameType="create table sample(";
-    String type=" varchar(200), ";
+    Logger logger = LoggerFactory.getLogger(ExcelProcessController.class);
 
-    public String getColumnName(String name){
-        columnNameType= columnNameType+name+" "+type;
-        return columnNameType;
+    String colName = "";
+
+    public String getColumnName(String colName) {
+        colName=colNmConvension(colName);
+        this.colName = this.colName + colName + " " + AppConstants.COL_TYPE;
+        return this.colName;
     }
 
-    public String getType(String type){
-        System.out.println(type);
-        if("NUMERIC".equals(type)){
 
+    public String colNmConvension(String colNm) {
+        if (colNm.contains(" ")) {
+            colNm = colNm.replaceAll(" ","_");
         }
-        return null;
+        return colNm;
     }
 }

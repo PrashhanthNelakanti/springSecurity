@@ -19,12 +19,12 @@ public class ExcelProcessController {
     @PostMapping("/upload")
     public String uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
-        
+
         if (service.hasExcelFormat(file)) {
             try {
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 logger.info(message);
-                service.excelToTutorials(file.getInputStream());
+                service.processExcelData(file.getInputStream(),file.getOriginalFilename());
                 return message;
             } catch (Exception e) {
                 message = "Could not upload the file: " + file.getOriginalFilename() + "!";
