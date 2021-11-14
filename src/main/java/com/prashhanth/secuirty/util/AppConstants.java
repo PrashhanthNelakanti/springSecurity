@@ -13,5 +13,6 @@ public class AppConstants {
     public static final String TABLE_CREATION_FAILURE = "TABLE CREATION FAILURE";
     public static final String COL_TYPE = " VARCHAR(200), ";
     public static final String CREATE_TABLE_IF_NOT_EXISTS = "CREATE TABLE IF NOT EXISTS ";
+    public static final String INSERT_INTO ="INSERT INTO " ;
 
 }

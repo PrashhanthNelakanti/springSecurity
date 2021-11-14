@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,32 +43,33 @@ public class ExcelProcessService {
             Sheet sheet = workbook.getSheetAt(1);
             Iterator<Row> rows = sheet.iterator();
             int rowNumber = 0;
-            String query = null;
+            List<String> insertQueries = new ArrayList<>();
+            String createQuery = "";
+            String insertQuery = "";
             while (rows.hasNext()) {
                 Row currentRow = rows.next();
                 Iterator<Cell> cellsInRow = currentRow.iterator();
                 while (cellsInRow.hasNext()) {
                     Cell currentCell = cellsInRow.next();
-                    if (rowNumber > 0) {
-                       /* if ("NUMERIC".equals(currentCell.getCellType().name())) {
-                            System.out.println(currentCell.getNumericCellValue());
-                        }
-                        if ("STRING".equals(currentCell.getCellType().name())) {
-                            System.out.println(currentCell.getStringCellValue());
-                        }
-                        if ("FORMULA".equals(currentCell.getCellType().name())) {
-                            System.out.println(currentCell.getCellFormula());
-                        }*/
+                    if (rowNumber != 0) {
+                        insertQuery += "'" + currentCell.toString() + "', ";
                     } else {
-                        query = excelProcessServiceHelper.getColumnName(currentCell.getStringCellValue());
+                        createQuery = excelProcessServiceHelper.getColumnName(currentCell.getStringCellValue());
                     }
                 }
+                String columnValue = excelProcessServiceHelper.getColumnValue(fileName, insertQuery);
+                insertQueries.add(columnValue);
+                insertQuery = "";
                 rowNumber++;
             }
-            String finalQuery = excelProcessServiceHelper.finalCreateQuery(fileName, query);
+            String finalQuery = excelProcessServiceHelper.finalCreateQuery(fileName, createQuery);
             excelDataPersistance.createTable(finalQuery);
+            for (String query: insertQueries){
+                //logger.debug(query);
+                excelDataPersistance.insertValue(query);
+            }
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(e.toString());
         }
         return null;
     }

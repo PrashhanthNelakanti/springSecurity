@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ExcelDataPersistance {
 
@@ -19,12 +21,42 @@ public class ExcelDataPersistance {
         String msg = null;
 
         try {
-            logger.info("Creating table..."+query);
+            logger.info("Creating table..." + query);
             jdbcTemplate.execute(query);
             return msg = AppConstants.TABLE_CREATION_SUCCESS;
 
         } catch (Exception e) {
-            logger.info("Failed to create table...with "+e.getMessage());
+            logger.info("Failed to create table...with " + e.getMessage());
+            return msg = AppConstants.TABLE_CREATION_FAILURE;
+        }
+    }
+
+    public String insertValues(List<String> queries) {
+        String msg = null;
+
+        try {
+            logger.info("Creating table..." + queries);
+            for (String insertQuery : queries) {
+                jdbcTemplate.update(insertQuery);
+            }
+            return msg = AppConstants.TABLE_CREATION_SUCCESS;
+
+        } catch (Exception e) {
+            logger.info("Failed to create table...with " + e.getMessage());
+            return msg = AppConstants.TABLE_CREATION_FAILURE;
+        }
+    }
+
+    public String insertValue(String query) {
+        String msg = null;
+
+        try {
+            logger.info("Inserting into table..." + query);
+                jdbcTemplate.update(query);
+            return msg = AppConstants.TABLE_CREATION_SUCCESS;
+
+        } catch (Exception e) {
+            logger.info("Failed to insert into table...with " + e.getMessage());
             return msg = AppConstants.TABLE_CREATION_FAILURE;
         }
     }

@@ -27,11 +27,24 @@ public class ExcelProcessServiceHelper {
         return colNm;
     }
 
+    public String getFileName(String filename){
+        return filename.substring(0,filename.indexOf("."));
+    }
+
     public String finalCreateQuery(String filename, String query) {
-        filename=filename.substring(0,filename.indexOf("."));
+        filename=getFileName(filename);
         query = AppConstants.CREATE_TABLE_IF_NOT_EXISTS +filename+"("+query;
         query = query.substring(0,query.length()-2);
         query= query+")";
+        this.colName="";
         return query;
+    }
+
+    public String getColumnValue(String filename,String insertQuery) {
+        filename=getFileName(filename);
+        insertQuery = AppConstants.INSERT_INTO +filename+" VALUES("+insertQuery;
+        insertQuery = insertQuery.substring(0,insertQuery.length()-2);
+        insertQuery= insertQuery+")";
+        return insertQuery;
     }
 }
