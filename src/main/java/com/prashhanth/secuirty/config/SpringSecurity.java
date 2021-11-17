@@ -1,9 +1,5 @@
 package com.prashhanth.secuirty.config;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +38,7 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").hasAnyRole("ADMIN")
                 //.antMatchers("/add").hasAnyRole("CREATOR")
                 .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
-                .antMatchers("/authenticate","/health","/add","student").permitAll()
+                .antMatchers("/authenticate","only/users","/health","/add","student","/upload").permitAll()
                 .and().
         exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

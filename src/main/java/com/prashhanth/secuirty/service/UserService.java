@@ -1,20 +1,27 @@
 package com.prashhanth.secuirty.service;
 
+import com.prashhanth.secuirty.controller.UserController;
 import com.prashhanth.secuirty.entity.user.User;
 import com.prashhanth.secuirty.exception.RoleDoNotExists;
 import com.prashhanth.secuirty.exception.UserAlreadyExits;
-import com.prashhanth.secuirty.repo.roles.RolesRepository;
-import com.prashhanth.secuirty.repo.user.UserRepo;
+import com.prashhanth.secuirty.repo.RolesRepository;
+import com.prashhanth.secuirty.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class UserService {
@@ -30,10 +37,11 @@ public class UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public User addUser(User user){
-        logger.info("Added user "+user);
-        if(getUserByName(user.getName()).isPresent())
+    public ResponseEntity<?> addUser(User user){
+        logger.info("Adding user "+user);
+        if(getUserByName(user.getName()).isPresent()) {
             throw new UserAlreadyExits("Check the user "+user.getName());
+        }
         String roles = Arrays.stream(user.getRole().split(",")).
                 filter(u->checkUserExists(u))
                 .map(x -> "ROLE_" + x).
@@ -41,7 +49,10 @@ public class UserService {
         user.setRole(roles);
         String enCodedPwd=bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(enCodedPwd);
-        return userRepo.save(user);
+        logger.info("Added user "+user);
+        User userObj = userRepo.save(user);
+        user.add(linkTo(methodOn(UserController.class).getAllUsers()).withSelfRel());
+        return new ResponseEntity<>(userObj, HttpStatus.CREATED);
     }
 
     public boolean checkUserExists(String role){
@@ -60,10 +71,20 @@ public class UserService {
         return userRepo.findById(id);
     }
 
-    public List<User> getAllUsers(){
+    public ResponseEntity<List<User>> getAllUsers(){
         logger.info("Users List "+userRepo.findAll());
-        return userRepo.findAll();
+        List<User> all = userRepo.findAll();
+        List<User> userUp = new ArrayList();
+
+        for (User user:
+             all) {
+            user.add(linkTo(methodOn(UserController.class).getUserById(user.getUserId())).withSelfRel());
+            userUp.add(user);
+        }
+        return new ResponseEntity(userUp,HttpStatus.OK);
     }
+
+
 
 
 }

@@ -1,7 +1,7 @@
 package com.prashhanth.secuirty.config;
 
 import com.prashhanth.secuirty.entity.user.User;
-import com.prashhanth.secuirty.repo.user.UserRepo;
+import com.prashhanth.secuirty.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
