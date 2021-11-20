@@ -97,8 +97,13 @@
     </dependencies>
 
     <build>
-    <finalName>spring-security</finalName>
+        <finalName>spring-security</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -109,6 +114,28 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>ng</executable>
+                    <workingDirectory>src/main/resources/ui/app</workingDirectory>
+                    <arguments>
+                        <argument>
+                            build
+                        </argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>
