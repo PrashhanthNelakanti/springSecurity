@@ -11,8 +11,12 @@ public class AppConstants {
     public static final String ROUTING_KEY = "sec_routingKey";
     public static final String TABLE_CREATION_SUCCESS = "TABLE CREATION SUCCESS";
     public static final String TABLE_CREATION_FAILURE = "TABLE CREATION FAILURE";
+    public static final String INSERT_SUCCESS = "INSERT SUCCESS";
+    public static final String INSERT_FAILURE = "INSERT FAILURE";
     public static final String COL_TYPE = " VARCHAR(200), ";
     public static final String CREATE_TABLE_IF_NOT_EXISTS = "CREATE TABLE IF NOT EXISTS ";
     public static final String INSERT_INTO ="INSERT INTO " ;
+    public static final String SELECT ="SELECT " ;
+    public static final String FROM ="FROM " ;
 
 }

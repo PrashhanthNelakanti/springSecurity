@@ -1,5 +1,6 @@
 package com.prashhanth.secuirty.processExcel.service;
 
+import com.prashhanth.secuirty.util.AppConstants;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -54,7 +55,7 @@ public class ExcelProcessService {
                     if (rowNumber != 0) {
                         insertQuery += "'" + currentCell.toString() + "', ";
                     } else {
-                        createQuery = excelProcessServiceHelper.getColumnName(currentCell.getStringCellValue());
+                        createQuery = excelProcessServiceHelper.getColumnName(currentCell.getStringCellValue(), AppConstants.COL_TYPE);
                     }
                 }
                 String columnValue = excelProcessServiceHelper.getColumnValue(fileName, insertQuery);
@@ -72,5 +73,19 @@ public class ExcelProcessService {
             logger.error(e.toString());
         }
         return null;
+    }
+
+    public String getProcessQueryCreateTbl(String tableNm,String env){
+        List<String> colNamesFromExistingTbl = excelDataPersistance.getColNamesFromExistingTbl(tableNm);
+        tableNm= env+">>"+tableNm;
+        String query=excelProcessServiceHelper.getColsWithTypes(tableNm,colNamesFromExistingTbl);
+        return excelDataPersistance.createTable(query);
+    }
+
+    public String insertQueryForExistingTbl(String srcTbl,String env){
+        getProcessQueryCreateTbl(srcTbl,env);
+        List<String> colNamesFromExistingTbl = excelDataPersistance.getColNamesFromExistingTbl(srcTbl);
+        srcTbl= env+"."+srcTbl;
+        return excelDataPersistance.insertValue(excelProcessServiceHelper.insertByColNms(srcTbl,colNamesFromExistingTbl));
     }
 }
