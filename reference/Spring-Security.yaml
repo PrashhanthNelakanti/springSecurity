@@ -10,7 +10,7 @@ produces:
 consumes:
   - application/json
 paths:
-  '/users/{userId}':
+  '/v1/users/{userId}':
     parameters:
       - type: integer
         name: userId
