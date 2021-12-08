@@ -16,7 +16,7 @@ paths:
         name: userId
         in: path
         required: true
-        description: Id of an existing user.
+        description: Sample test on stoplight
     get:
       summary: Get User Info by User ID
       tags: []
