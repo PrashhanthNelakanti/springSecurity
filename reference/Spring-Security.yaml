@@ -168,4 +168,6 @@ definitions:
       - lastName
       - email
       - emailVerified
+    x-examples: {}
+    description: ''
 basePath: /health
