@@ -1,0 +1,34 @@
+<div class="jumbotron">
+  <h1>Project Excel<i class="fa fa-file-excel-o" aria-hidden="true"></i>
+  </h1>
+  <h4>This project will convert Almost any Excel data and Store in DB</h4>
+  <div class="container">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col alert alert-primary" role="alert" *ngIf="status == 'success'">
+        {{msg}}
+      </div>
+      <div class="col alert alert-danger" role="alert" *ngIf="status == 'failed'">
+        {{msg}}
+      </div>
+      <div class="col"></div>
+    </div>
+
+    <div class="container">
+      <div class="row"><h4>You can also Transfer the Data</h4></div>
+      <div class="row">
+        <div class="col">
+          <input type="text" placeholder="Table Name" [(ngModel)]="table"/>
+        </div>
+        <div class="col">
+          <input type="text" placeholder="DB Name" [(ngModel)]="db"/>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-primary" type="submit" (click)="onSubmit()">Transfer</button>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+      </div>
+    </div>
+  </div>
+</div>

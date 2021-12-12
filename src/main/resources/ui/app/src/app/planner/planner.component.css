@@ -1,0 +1,28 @@
+span {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  margin: 0px;
+  background-color: #86c186;
+}
+
+.row{
+  --bs-gutter-x: 0.1rem;
+}
+
+.algn{
+  text-align: center;
+  border: 1px solid #eae3e3;
+  background-color: #86c186;
+}
+
+.chg{
+  background-color: #d9887e;
+}
+
+.scrol{
+  overflow-y: scroll;
+  width:120000px;
+}
+
+
