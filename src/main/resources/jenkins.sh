@@ -1,0 +1,1 @@
+java -jar /Users/prashhanthsoujanya/Desktop/CodeSpace/springSecurity/src/main/resources/jenkins.war
