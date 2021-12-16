@@ -14,7 +14,7 @@ pipeline {
         }
        stage('install nodemodules') {
             steps {
-                sh "cd ${env.WORKSPACE}/src/main/resources/ui/app/src"
+                sh "cd ${env.WORKSPACE}/src"
                 sh 'pwd'
             }
         }
