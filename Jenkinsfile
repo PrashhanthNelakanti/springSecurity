@@ -20,6 +20,12 @@ pipeline {
                 sh "ng serve"
             }
         }
+       stage('back-to-main-dir') {
+            steps {
+                dir("${env.WORKSPACE}"){
+                sh "mvn clean install"
+            }
+        }
      }
   }   
 }
