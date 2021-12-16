@@ -18,10 +18,16 @@ pipeline {
                 sh 'pwd'
             }
         }
-       stage('build') {
-            steps {
-                sh 'mvn clean install'
-            }
-        }
+       node {
+    stage("Test") {
+        sh script:'''
+          #!/bin/bash
+          echo "This is start $(pwd)"
+          mkdir hello
+          cd ./hello
+          echo "This is $(pwd)"
+        '''
+    }
+}
     }
 }
