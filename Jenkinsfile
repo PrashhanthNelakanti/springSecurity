@@ -15,7 +15,7 @@ pipeline {
        stage('change dir') {
             steps {
                 dir("${env.WORKSPACE}/src/main/resources/ui/app"){
-                sh "ls"
+                sh "npm install"
             }
         }
      }
