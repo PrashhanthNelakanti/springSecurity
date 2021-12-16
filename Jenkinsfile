@@ -15,7 +15,7 @@ pipeline {
        stage('change dir') {
             steps {
                 dir("${env.WORKSPACE}/src"){
-                sh "pwd"
+                sh "ls"
             }
         }
      }
