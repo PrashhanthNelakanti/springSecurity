@@ -12,6 +12,12 @@ pipeline {
                 sh 'ng --version'
             }
         }
+       stage('install nodemodules') {
+            steps {
+                sh "cd ${env.WORKSPACE}/src/main/resources/ui/app"
+                sh 'npm install'
+            }
+        }
        stage('build') {
             steps {
                 sh 'mvn clean install'
