@@ -17,7 +17,6 @@ pipeline {
                 dir("${env.WORKSPACE}/src/main/resources/ui/app"){
                 sh "npm install"
                 sh "ls"
-                sh "ng serve"
             }
         }
        stage('back-to-main-dir') {
