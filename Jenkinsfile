@@ -14,20 +14,10 @@ pipeline {
         }
        stage('install nodemodules') {
             steps {
-                sh "cd ${env.WORKSPACE}/src"
-                sh 'pwd'
+                dir("${env.WORKSPACE}/src"){
+                sh "pwd"
             }
         }
-       node {
-    stage("Test") {
-        sh script:'''
-          #!/bin/bash
-          echo "This is start $(pwd)"
-          mkdir hello
-          cd ./hello
-          echo "This is $(pwd)"
-        '''
-    }
-}
+      
     }
 }
