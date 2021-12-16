@@ -15,7 +15,7 @@ pipeline {
        stage('install nodemodules') {
             steps {
                 sh "cd ${env.WORKSPACE}/src/main/resources/ui/app/src"
-                sh 'ls'
+                sh 'pwd'
             }
         }
        stage('build') {
