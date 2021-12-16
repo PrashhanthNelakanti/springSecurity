@@ -1,7 +1,6 @@
 pipeline {
     agent any
-
-  stages {
+    stages {
         stage('npm') {
             steps {
                 sh 'npm --version'
@@ -17,14 +16,16 @@ pipeline {
                 dir("${env.WORKSPACE}/src/main/resources/ui/app"){
                 sh "npm install"
                 sh "ls"
+               }
             }
         }
        stage('back-to-main-dir') {
-            steps {
-                dir("${env.WORKSPACE}"){
-                sh "mvn clean install"
-            }
-        }
-     }
-  }   
+           steps {
+               dir("${env.WORKSPACE}"){
+               sh "mvn clean install"
+             }
+           }
+       }
+    }
 }
+
