@@ -30,7 +30,7 @@ pipeline {
 }
 post {
     success {
-      mail to: prashhanth.nelakanti@gmail.com, subject: ‘The Pipeline success :(‘
+      echo "mail to: prashhanth.nelakanti@gmail.com, subject: ‘The Pipeline success :("
     }
   }
 
