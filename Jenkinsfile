@@ -27,7 +27,7 @@ pipeline {
            }
        }
        stage('Deploy'){
-          stage{
+          steps{
             dir("${env.WORKSPACE}"){
                sh "pwd"
                sh 'aws s3 cp ./target/spring-security.jar s3://10prashhanthn/spring-security1.jar'
