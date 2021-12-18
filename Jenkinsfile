@@ -31,7 +31,7 @@ pipeline {
              post {
                  success {
                     dir("${env.WORKSPACE}"){
-                     archiveArtifacts 'target/*.jar'
+                     sh 'pwd'
                      sh 'aws configure set region us-east-1'
                      sh 'aws s3 cp ./target/spring-security.jar s3://10prashhanthn/spring-security.jar'
                    }
