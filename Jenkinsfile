@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+            AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+            AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+      }
     stages {
         stage('npm') {
             steps {
@@ -24,13 +28,15 @@ pipeline {
                dir("${env.WORKSPACE}"){
                sh "mvn clean install"
              }
+             post {
+                 success {
+                     archiveArtifacts 'target/*.jar'
+                     sh 'aws configure set region us-east-1'
+                     sh 'aws s3 cp ./target/spring-security.jar s3://10prashhanthn/spring-security.jar'
+                 }
+             }
            }
        }
     }
 }
-post {
-    success {
-      echo "mail to: prashhanth.nelakanti@gmail.com, subject: ‘The Pipeline success :("
-    }
-  }
 
