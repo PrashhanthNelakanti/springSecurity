@@ -37,12 +37,14 @@ pipeline {
           steps{
             dir("${env.WORKSPACE}"){
                sh "pwd"
-               //sh 'aws s3 cp ./target/spring-security.jar s3://10prashhanthn/spring-security1.jar'
-               sh "aws elasticbeanstalk create-application-version --application-name ${AWS_EB_APP_NAME}--version-label ${AWS_EB_APP_VERSION} --source-bundle S3Bucket=${AWS_S3_BUCKET},S3Key=${ARTIFACT_NAME}"
-               sh "aws elasticbeanstalk update-environment --application-name ${AWS_EB_APP_NAME} --environment-name ${AWS_EB_ENVIRONMENT} --version-label ${AWS_EB_APP_VERSION}"
+               sh "aws s3 cp ./target/spring-security.jar s3://10prashhanthn/spring-security${env.BUILD_ID}.jar"
+               sh "aws elasticbeanstalk create-application-version --application-name spring-sec --version-label v.1.2 --source-bundle S3Bucket=10prashhanthn,S3Key=spring-security${env.BUILD_ID}"
               }
           }
        }
     }
 }
 
+
+//aws elasticbeanstalk update-environment --environment-name Prashhanth-env-1 --application-name spring-security --version-label v2
+//aws elasticbeanstalk create-application-version --application-name $AWS_EB_APP_NAME --version-label $AWS_EB_APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=$ARTIFACT_NAME
