@@ -38,7 +38,8 @@ pipeline {
             dir("${env.WORKSPACE}"){
                sh "pwd"
                sh "aws s3 cp ./target/spring-security.jar s3://10prashhanthn/spring-security${env.BUILD_ID}.jar"
-               sh "aws elasticbeanstalk create-application-version --application-name prashhanth --version-label v.1.2 --source-bundle S3Bucket=10prashhanthn,S3Key=spring-security${env.BUILD_ID}.jar"
+               sh "aws elasticbeanstalk create-application-version --application-name profile --version-label v.1.3 --source-bundle S3Bucket=10prashhanthn,S3Key=spring-security${env.BUILD_ID}.jar"
+               sh "aws elasticbeanstalk update-environment --application-name profile --environment-name Profile-env --version-label v.1.3"
               }
           }
        }
