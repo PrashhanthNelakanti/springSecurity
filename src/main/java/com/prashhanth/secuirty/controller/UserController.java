@@ -45,7 +45,7 @@ public class UserController {
 
     @GetMapping("/health")
     public String getStatus(){
-        return "UP3111";
+        return "UP-1";
     }
 
     @GetMapping("/user/{id}")
