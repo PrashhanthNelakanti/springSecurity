@@ -1,0 +1,39 @@
+.jumbotron {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.fontStyle {
+    font-family: Tahoma, sans-serif;
+}
+
+.prashhanth {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    padding: 10px;
+    align-self: initial;
+}
+
+@media (min-width: 768px) {
+    .carousel-multi-item-2 .col-md-3 {
+        float: left;
+        width: 25%;
+        max-width: 100%;
+        align-content: center
+    }
+}
+
+.coder {
+    height: 200px;
+    width: 250px;
+}
+
+.carousel-multi-item-2 .card img {
+    border-radius: 2px;
+}

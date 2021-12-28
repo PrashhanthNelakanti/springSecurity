@@ -3,49 +3,49 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
-
-import {AccordionModule} from 'primeng/accordion';
-import {InputTextModule} from 'primeng/inputtext';
-import {FormsModule} from "@angular/forms";
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
-import {ButtonModule} from "primeng/button";
-import {MenubarModule} from 'primeng/menubar';
-import {CheckboxModule} from "primeng/checkbox";
-import {RadioButtonModule} from "primeng/radiobutton";
-import {ToastModule} from "primeng/toast";
-import {RippleModule} from "primeng/ripple";
-import {FileUploadModule} from 'primeng/fileupload';
+import {FormsModule} from '@angular/forms';
 
 import {GenericService} from "./generic.service";
-import {MessageService} from "primeng/api";
-import {FileuploadComponent} from './fileupload/fileupload.component';
 import {PlannerComponent} from './planner/planner.component';
+import {MainPageComponent} from "./components/main-page/main-page.component";
+import {FooterComponent} from "./components/main-page/footer/footer.component";
+import {HomeComponent} from "./components/primary/home/home.component";
+import {ProfileComponent} from "./components/main-page/profile/profile.component";
+import {StackComponent} from "./components/main-page/stack/stack.component";
+import {AboutComponent} from "./components/main-page/about/about.component";
+import {InterestsComponent} from "./components/main-page/interests/interests.component";
+import {ErrorComponent} from "./components/error/error.component";
+import {GalleryComponent} from "./components/primary/gallery/gallery.component";
+import {AppRoutingModule} from "./app-routing.module";
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileuploadComponent,
-    PlannerComponent
+    PlannerComponent,
+
+    MainPageComponent,
+    HomeComponent,
+    ProfileComponent,
+    StackComponent,
+    AboutComponent,
+    InterestsComponent,
+    FooterComponent,
+    ErrorComponent,
+    GalleryComponent,
+
   ],
   imports: [
-    BrowserModule,
-    AccordionModule,
-    BrowserAnimationsModule,
-    InputTextModule,
-    CheckboxModule,
-    ButtonModule,
-    RadioButtonModule,
-    RippleModule,
     FormsModule,
-    MenubarModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+
     HttpClientModule,
-    MessagesModule,
-    MessageModule,
-    ToastModule,
-    FileUploadModule
+
+    AppRoutingModule
+
   ],
-  providers: [GenericService,MessageService],
+  providers: [GenericService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
