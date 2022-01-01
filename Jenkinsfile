@@ -27,7 +27,7 @@ pipeline {
             }
         }
        stage('back-to-main-dir') {
-           steps {npm audit fix
+           steps {
                dir("${env.WORKSPACE}"){
                sh "mvn clean install"
              }
