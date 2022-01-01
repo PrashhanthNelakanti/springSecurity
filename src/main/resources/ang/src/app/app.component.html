@@ -1,0 +1,22 @@
+<div class="navbar-fixed" *ngIf="false">
+    <nav>
+        <div class="nav-wrapper row"> <a href="#!" class="brand-logo">UserDetails</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="col s10 m10 l10 right hide-on-med-and-down">
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/get']">GET</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/list']">LIST OF USERS</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/new']">NEW </a></li>
+            </ul>
+        </div>
+        <ul class="side-nav" id="mobile-demo">
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/get']">GET</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/list']">LIST OF USERS</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/new']">NEW </a></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+<app-main-page></app-main-page>

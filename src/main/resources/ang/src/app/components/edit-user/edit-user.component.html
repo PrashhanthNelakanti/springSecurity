@@ -1,0 +1,26 @@
+<div class="container">
+  <form (ngSubmit)="editForm()" #formCtl="ngForm">
+  <div class="form group" >
+      <label for="id">Id:</label>
+    <input type="number" name="id" id="id" readonly required class="form-control" [(ngModel)]="user.id" class="validate">
+  </div>
+
+  <div class="form group">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required class="form-control" [(ngModel)]="user.name" class="validate" >
+  </div>
+
+  <div class="form group">
+    <label for="salary">Salary:</label>
+    <input type="number" name="salary" id="salary" required class="form-control" [(ngModel)]="user.salary" class="validate" >
+  </div>
+
+  <div class="form group">
+    <label for="location">Location:</label>
+    <input type="text" name="location" id="location" required class="form-control" [(ngModel)]="user.location" class="validate" >
+  </div>
+
+<button class="btn waves-effect waves-light" type="submit" name="action" [disabled]="!formCtl.form.valid">Save
+</button>
+  </form>
+</div>

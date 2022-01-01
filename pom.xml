@@ -130,7 +130,7 @@
                 </executions>
                 <configuration>
                     <executable>ng</executable>
-                    <workingDirectory>src/main/resources/ui/app</workingDirectory>
+                    <workingDirectory>src/main/resources/ang</workingDirectory>
                     <arguments>
                         <argument>
                             build

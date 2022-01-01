@@ -1,0 +1,16 @@
+<!doctype html> 
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+ <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+ <!-- LineIcons CSS -->
+<link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
+<title>LineIcons Starter Template</title>
+</head>
+<body>
+ <h1>Icons Added!</h1>
+<i class="lni lni-add-file"></i>
+<i class="lni lni-cart"></i>
+<i class="lni lni-calculator"></i>
+</body>
+</html>
