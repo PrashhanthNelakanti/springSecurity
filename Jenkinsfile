@@ -21,13 +21,13 @@ pipeline {
        stage('change dir') {
             steps {
                 dir("${env.WORKSPACE}/src/main/resources/ang"){
-                sh "npm install"
+                sh "npm i --legacy-peer-deps"
                 sh "ls"
                }
             }
         }
        stage('back-to-main-dir') {
-           steps {
+           steps {npm audit fix
                dir("${env.WORKSPACE}"){
                sh "mvn clean install"
              }
