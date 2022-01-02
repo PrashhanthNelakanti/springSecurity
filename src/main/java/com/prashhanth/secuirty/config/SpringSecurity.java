@@ -38,7 +38,7 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").hasAnyRole("ADMIN")
                 //.antMatchers("/add").hasAnyRole("CREATOR")
                 .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
-                .antMatchers("/authenticate","only/users","/health","/add","student","/upload").permitAll()
+                .antMatchers("/authenticate","only/users","/health","/add","student","/upload","/profile/**").permitAll()
                 .and().
         exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

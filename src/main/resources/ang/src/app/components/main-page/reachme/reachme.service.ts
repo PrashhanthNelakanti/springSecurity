@@ -10,8 +10,8 @@ import {Contact} from './contact';
 @Injectable()
 export class ReachmeService {
 
-  basePath: string = 'http://prashhanth-env.eba-yadxpypp.us-east-1.elasticbeanstalk.com/';
-  //basePath: string = 'http://localhost:5000/';
+  //basePath: string = 'http://prashhanth-env.eba-yadxpypp.us-east-1.elasticbeanstalk.com/';
+  basePath: string = 'http://localhost:5000/';
   private headers=new Headers({'Content-Type':'application/json'});
   private options=new RequestOptions({headers:this.headers});
   constructor(private _http:Http) { }

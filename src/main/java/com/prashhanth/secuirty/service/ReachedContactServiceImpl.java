@@ -15,34 +15,33 @@ public class ReachedContactServiceImpl implements ReachedContactService {
     @Autowired
     ReachedContactRepo reachedContactRepo;
 
-
     @Override
     public ReachedContact addReachedContact(ReachedContact contact) {
-        return null;
+        return reachedContactRepo.save(contact);
     }
 
     @Override
     public List<ReachedContact> getAllReachedContacts() {
-        return null;
+        return reachedContactRepo.findAll();
     }
 
     @Override
     public Optional<ReachedContact> getById(Long id) {
-        return Optional.empty();
+        return reachedContactRepo.findById(id);
     }
 
     @Override
     public Optional<ReachedContact> updateById(Long id) {
-        return Optional.empty();
+        return null;
     }
 
     @Override
     public void deleteById(Long id) {
-
+        reachedContactRepo.deleteById(id);
     }
 
     @Override
     public void deleteAll() {
-
+        reachedContactRepo.deleteAll();
     }
 }
