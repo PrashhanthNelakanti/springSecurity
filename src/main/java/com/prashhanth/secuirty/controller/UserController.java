@@ -6,6 +6,7 @@ import com.prashhanth.secuirty.entity.JwtRequest;
 import com.prashhanth.secuirty.entity.JwtResponse;
 import com.prashhanth.secuirty.entity.user.User;
 import com.prashhanth.secuirty.service.UserService;
+import com.prashhanth.secuirty.service.transactions.UserTransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,16 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*", origins = "*")
 public class UserController {
 
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     UserService service;
+
+    @Autowired
+    UserTransactionService userTransactionService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -72,6 +77,12 @@ public class UserController {
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtResponse(token));
+    }
+
+    @PostMapping("/accounts")
+    public String transaction(@RequestBody User user){
+        logger.info("Making a tranction");
+        return userTransactionService.transactions(user);
     }
 
 
